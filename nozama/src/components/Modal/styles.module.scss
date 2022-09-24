@@ -1,19 +1,47 @@
 @use '../../utils/sass-utils/variables';
 
 .product {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
+    margin-top: 10px;
+    &__info {
+        align-self: stretch;
+        height: auto;
+        justify-content: space-around;
 
-    &__container {
-        justify-content: flex-start;
-        @extend .product;
+        &__name {
+            font-weight: bold;
+        }
     }
-    &__texts{
-        flex-direction: column;
-        @extend .product;
-    }
+    &__actions {
+        align-items: flex-end !important;
+        align-self: stretch;
+        height: auto;
+        justify-content: space-around;
 
-    
+        &__icons :hover{
+            background: rgba(0,0,0,0.06);
+            cursor: pointer;
+        }
+    }
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &__price {
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 10px;
+
+        &__text {
+            color: #FF9900;
+            font-weight: 600;
+        }
+    }
+    &__button {
+        margin-top: 10px;
+        width: 100%;
+    }
 }

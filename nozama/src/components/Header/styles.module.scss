@@ -6,4 +6,8 @@
     align-items: center;
     justify-content: space-evenly;
     background-color: rgba($color: variables.$primary-color, $alpha: 0.3);
+
+    &__img {
+        cursor: pointer;
+    }
 }

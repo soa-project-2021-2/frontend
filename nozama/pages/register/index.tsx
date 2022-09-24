@@ -37,7 +37,7 @@ export default function Register() {
     <section className={styles.register}>
       <Image src={Logo} width={220} height={100} alt="Logo" />
       <form onSubmit={formik.handleSubmit} className={styles.register__form}>
-        <VStack spacing='24px'>
+        <VStack spacing='20px'>
           <FormControl>
             <FormLabel>Enter your name</FormLabel>
             <Input

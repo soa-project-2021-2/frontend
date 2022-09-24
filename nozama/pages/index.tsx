@@ -33,7 +33,7 @@ export default function Home() {
     <section className={styles.login}>
       <Image src={Logo} width={220} height={100} alt="Logo" />
       <form onSubmit={formik.handleSubmit} className={styles.login__form}>
-        <VStack spacing='24px'>
+        <VStack spacing='20px'>
           <FormControl>
             <FormLabel>Enter your email</FormLabel>
             <Input
