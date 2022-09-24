@@ -1,0 +1,19 @@
+@use '../../utils/sass-utils/variables';
+
+.product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    &__container {
+        justify-content: flex-start;
+        @extend .product;
+    }
+    &__texts{
+        flex-direction: column;
+        @extend .product;
+    }
+
+    
+}

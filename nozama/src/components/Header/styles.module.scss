@@ -1,0 +1,9 @@
+@use '../../utils/sass-utils/variables';
+
+.header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba($color: variables.$primary-color, $alpha: 0.3);
+}
