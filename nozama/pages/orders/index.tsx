@@ -22,15 +22,18 @@ export default function Orders() {
                 list_products: [
                     {
                         name: 'TV',
-                        price: 1200
+                        price: 1200,
+                        qtd: 1
                     },
                     {
                         name: 'Smartphone',
-                        price: 1800
+                        price: 1800,
+                        qtd: 4
                     },
                     {
                         name: 'Mouse',
-                        price: 200
+                        price: 200,
+                        qtd: 2
                     },
                 ],
                 price_total: 3200,
@@ -63,7 +66,7 @@ export default function Orders() {
                                                 {
                                                     item.list_products.map(product => {
                                                         return (
-                                                            <ListItem key={uuid()}>{product.name} (${product.price})</ListItem>
+                                                            <ListItem key={uuid()}>{product.qtd} {product.name} (${product.price})</ListItem>
                                                         )
                                                     })
                                                 }

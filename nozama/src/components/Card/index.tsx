@@ -4,8 +4,7 @@ import {
     Button
 } from "@chakra-ui/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart, faPlus, faClose } from '@fortawesome/free-solid-svg-icons'
-import { faHeart as faHeartNotFull } from '@fortawesome/free-regular-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import styles from './styles.module.scss'
 
@@ -15,11 +14,10 @@ interface CardProps {
     price: string;
     imageUrl: string;
     imageAlt: string;
-    isFav: boolean;
-    isAdd: boolean;
+    handleAdd: () => void
 }
 
-export default function Card({ title, price, imageUrl, imageAlt, isFav, isAdd }: CardProps) {
+export default function Card({ title, price, imageUrl, imageAlt, handleAdd }: CardProps) {
 
     return (
         <Box className={styles.card} >
@@ -28,11 +26,10 @@ export default function Card({ title, price, imageUrl, imageAlt, isFav, isAdd }:
             <Box className={styles.card__info}>
                 <Box className={styles.card__info__line}>
                     <Text as='b'>{title}</Text>
-                    <FontAwesomeIcon icon={isFav ? faHeart : faHeartNotFull} color={isFav ? 'red' : 'gray'} className={styles.card__info__line__icon} />
                 </Box>
                 <Box className={styles.card__info__line}>
                     <Text>${price}</Text>
-                    <Button size='xs' colorScheme="blue" leftIcon={<FontAwesomeIcon icon={isAdd ? faClose : faPlus} />}>{isAdd ? 'Remove' : 'Add'}</Button>
+                    <Button onClick={handleAdd} size='xs' colorScheme="blue" leftIcon={<FontAwesomeIcon icon={faPlus} />}>{'Add'}</Button>
                 </Box>
             </Box>
         </Box>
