@@ -48,6 +48,7 @@ export default function Register() {
       }
     },
   });
+
   return (
     <section className={styles.register}>
       <Image src={Logo} width={220} height={100} alt="Logo" />
@@ -110,7 +111,7 @@ export default function Register() {
               </InputRightElement>
             </InputGroup>
           </FormControl>
-          <Checkbox>
+          <Checkbox name="sendEmail" id="sendEmail" onChange={formik.handleChange}>
             Do you want receive emails about promos and new products?
           </Checkbox>
           <Button colorScheme="blue" type="submit" width="100%">Sign Up</Button>
