@@ -15,10 +15,14 @@ import Logo from '../public/images/logo.png'
 import Image from 'next/image'
 import styles from './styles.module.scss'
 import Link from 'next/link'
+import UseUserStore from '../src/stories/userStore'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show)
+  const { handleLogin } = UseUserStore();
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -26,7 +30,11 @@ export default function Home() {
       password: ''
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      handleLogin({
+        email: values.email,
+        password: values.password
+      })
+      router.push("/search")
     },
   });
   return (
