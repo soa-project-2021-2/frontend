@@ -16,10 +16,14 @@ import Logo from '../../public/images/logo.png'
 import Image from 'next/image'
 import styles from './styles.module.scss'
 import Link from 'next/link'
+import { register } from '../../src/services/auth'
+import { useRouter } from 'next/router'
+
 
 export default function Register() {
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show)
+  const route = useRouter()
 
   const formik = useFormik({
     initialValues: {
@@ -27,10 +31,21 @@ export default function Register() {
       email: '',
       password: '',
       confirmPassword: '',
-      sendEmail: 'false'
+      sendEmail: true
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      if (values.password === values.confirmPassword) {
+        register({
+          name: values.name,
+          email: values.email,
+          password: values.password,
+          sendEmail: values.sendEmail
+        })
+        route.push("/")
+      }
+      else {
+        alert("Passwords not matched")
+      }
     },
   });
   return (

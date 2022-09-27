@@ -9,7 +9,7 @@ type UserLoginState = {
     getUserLoginInfo: () => void
 }
 
-const UseUserLoginStore = create<UserLoginState>(set => ({
+const UseUserStore = create<UserLoginState>(set => ({
     UserLogin: {} as UserLogin,
     token: '',
     handleLogin: async ({ email, password }: UserLogin) => {
@@ -23,4 +23,4 @@ const UseUserLoginStore = create<UserLoginState>(set => ({
     }
 }));
 
-export default UseUserLoginStore
+export default UseUserStore

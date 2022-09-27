@@ -17,13 +17,18 @@ export async function login({ email, password }: UserLogin) {
 }
 
 export async function register({ name, email, password, sendEmail }: UserRegister) {
-    const response = await api.post('/users', {
-        name,
-        email,
-        password,
-        sendEmail
-    })
-    return response.data;
+    try {
+        const response = await api.post('/users', {
+            name,
+            email,
+            password,
+            sendEmail
+        })
+        return response.data;
+    } catch (error) {
+        alert("Error in register")
+        console.log(error)
+    }
 }
 
 export async function getUser() {
