@@ -1,6 +1,10 @@
-import { Wrap, WrapItem } from "@chakra-ui/react"
+import {
+  Wrap, WrapItem, Alert,
+  AlertIcon,
+} from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import { parseCookies } from "nookies"
+import { useState } from "react"
 import Card from "../../src/components/Card"
 import Header from "../../src/components/Header"
 import useCartStore from "../../src/stories/cartStore"
@@ -8,6 +12,7 @@ import styles from "./styles.module.scss"
 
 export default function Search() {
   const { setCart, cart } = useCartStore()
+  const [alert, setAlert] = useState(false)
 
   const handleAdd = () => {
     setCart({
@@ -15,12 +20,20 @@ export default function Search() {
       price: 1200,
       qtd: 1
     })
-    console.log(cart)
+    setAlert(true)
+
+    setTimeout(() => {
+      setAlert(false)
+    }, 2000);
   }
 
   return (
     <>
       <Header />
+      {alert && <Alert className={styles.backgroundAnimated} status='success'>
+        <AlertIcon />
+        Product added to cart
+      </Alert>}
       <Wrap spacing='30px' className={styles.search}>
         <WrapItem>
           <Card
@@ -32,6 +45,7 @@ export default function Search() {
           />
         </WrapItem>
       </Wrap>
+
     </>
   )
 }

@@ -7,7 +7,7 @@ import {
     Td,
     TableContainer,
     UnorderedList,
-    ListItem
+    ListItem,
 } from "@chakra-ui/react"
 import { useState } from "react"
 import Header from "../../src/components/Header"

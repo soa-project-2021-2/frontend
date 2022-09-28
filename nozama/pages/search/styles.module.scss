@@ -3,3 +3,38 @@
     overflow-y: auto;
     padding: 30px;
 }
+
+@-o-keyframes fadeIt {
+    0% {
+        background-color: #C6F6D5;
+    }
+
+    50% {
+        background-color: #ffffff;
+    }
+
+    100% {
+        background-color: #C6F6D5;
+    }
+}
+
+@keyframes fadeIt {
+    0% {
+        background-color: #C6F6D5;
+    }
+
+    50% {
+        background-color: #ffffff;
+        ;
+    }
+
+    100% {
+        background-color: #C6F6D5;
+    }
+}
+
+.backgroundAnimated {
+    background-image: none !important;
+    -o-animation: fadeIt 5s ease-in-out;
+    animation: fadeIt 5s ease-in-out;
+}

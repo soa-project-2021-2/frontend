@@ -45,7 +45,7 @@ export default function DrawerCart({ isOpen, onClose, cart, handleRemove }: any)
             <DrawerOverlay />
             <DrawerContent>
                 <DrawerCloseButton />
-                <DrawerHeader>My Cart(1)</DrawerHeader>
+                <DrawerHeader>My Cart({cart.length})</DrawerHeader>
                 <DrawerBody>
                     {/* <Input placeholder='Type here...' /> */}
                     {cart?.map((item: any, indice: number) => (
