@@ -31,8 +31,8 @@ export default function Home() {
       email: '',
       password: ''
     },
-    onSubmit: values => {
-      handleLogin({
+    onSubmit: async values => {
+      await handleLogin({
         email: values.email,
         password: values.password
       })
