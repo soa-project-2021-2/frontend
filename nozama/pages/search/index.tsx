@@ -1,4 +1,6 @@
 import { Wrap, WrapItem } from "@chakra-ui/react"
+import { GetServerSideProps } from "next"
+import { parseCookies } from "nookies"
 import Card from "../../src/components/Card"
 import Header from "../../src/components/Header"
 import useCartStore from "../../src/stories/cartStore"
@@ -35,3 +37,17 @@ export default function Search() {
 }
 
 
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ['nozama_token']: token } = parseCookies(ctx)
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {}
+  }
+}

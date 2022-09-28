@@ -13,6 +13,8 @@ import { useState } from "react"
 import Header from "../../src/components/Header"
 import TagStatus from "../../src/components/TagStatus"
 import uuid from 'react-uuid'
+import { GetServerSideProps } from "next"
+import { parseCookies } from "nookies"
 
 export default function Orders() {
     const [obj, setObj] = useState(
@@ -88,3 +90,17 @@ export default function Orders() {
 }
 
 
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const { ['nozama_token']: token } = parseCookies(ctx)
+    if (!token) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false
+            }
+        }
+    }
+    return {
+        props: {}
+    }
+}

@@ -17,6 +17,8 @@ import styles from './styles.module.scss'
 import Link from 'next/link'
 import UseUserStore from '../src/stories/userStore'
 import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
+import { parseCookies } from 'nookies'
 
 export default function Home() {
   const [show, setShow] = useState(false)
@@ -81,3 +83,18 @@ export default function Home() {
     </section>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ['nozama_token']: token } = parseCookies(ctx)
+  if (token) {
+    return {
+      redirect: {
+        destination: '/search',
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {}
+  }
+}

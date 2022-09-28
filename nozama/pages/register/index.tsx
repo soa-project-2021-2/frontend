@@ -18,6 +18,8 @@ import styles from './styles.module.scss'
 import Link from 'next/link'
 import { register } from '../../src/services/auth'
 import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
+import { parseCookies } from 'nookies'
 
 
 export default function Register() {
@@ -124,3 +126,18 @@ export default function Register() {
     </section>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ['nozama_token']: token } = parseCookies(ctx)
+  if (token) {
+    return {
+      redirect: {
+        destination: '/search',
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {}
+  }
+}
