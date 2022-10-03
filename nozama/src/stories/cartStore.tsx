@@ -1,26 +1,38 @@
 import create from 'zustand';
+import { products } from '../services/product';
 
 type product = {
     name: string,
     price: number,
-    qtd: number
+    qty: number,
+    image: string
 }
 type cartStore = {
+    productList: product[]
     cart: product[],
     setCart: (cartItem: any) => void,
     removeProductCart: (name: string) => void
-    minusProduct: (cartItem: any) => void
+    minusProduct: (cartItem: any) => void,
+    getProducts: () => void,
+    esvaziar: () => void
 }
 
 const useCartStore = create<cartStore>(set => ({
+    productList: [],
     cart: [],
     setCart: (cartItem: product) => {
         set((state) => {
-            let newProduct = state.cart.filter((item) => item.name === cartItem.name).map((item, indice) => indice)
+            let newProduct = state.cart.map((item, indice) => ({
+                ...item,
+                indice
+            }
+            )
+            ).filter((item) => item.name === cartItem.name)
+
             console.log(newProduct)
             if (newProduct.length > 0) {
                 let cart = state.cart
-                cart[newProduct[0]].qtd = cart[newProduct[0]].qtd + 1
+                cart[newProduct[0].indice].qty = cart[newProduct[0].indice].qty + 1
                 return {
                     cart: cart,
                 }
@@ -45,11 +57,16 @@ const useCartStore = create<cartStore>(set => ({
     },
     minusProduct: (cartItem: product) => {
         set((state) => {
-            let newProduct = state.cart.filter((item) => item.name === cartItem.name).map((item, indice) => indice)
+            let newProduct = state.cart.map((item, indice) => ({
+                ...item,
+                indice
+            }
+            )
+            ).filter((item) => item.name === cartItem.name)
             let cart = state.cart
-            cart[newProduct[0]].qtd = cart[newProduct[0]].qtd - 1
-            if (cart[newProduct[0]].qtd === 0) {
-                let newCart = cart.filter((item) => item.name !== cart[newProduct[0]].name)
+            cart[newProduct[0].indice].qty = cart[newProduct[0].indice].qty - 1
+            if (cart[newProduct[0].indice].qty === 0) {
+                let newCart = cart.filter((item) => item.name !== cart[newProduct[0].indice].name)
                 return {
                     cart: newCart
                 }
@@ -60,6 +77,14 @@ const useCartStore = create<cartStore>(set => ({
                 }
             }
         })
+    },
+    getProducts: async () => {
+        const data = await products()
+        set(() => ({ productList: data }))
+    },
+    esvaziar: () => {
+        set(() => ({cart: []}))
+
     }
 }))
 

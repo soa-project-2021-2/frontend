@@ -7,7 +7,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['images.unsplash.com', 'bit.ly']
+    domains: ['carrefourbr.vtexassets.com']
   }
 }
 

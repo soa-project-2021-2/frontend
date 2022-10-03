@@ -23,7 +23,7 @@ import { parseCookies } from 'nookies'
 export default function Home() {
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show)
-  const { handleLogin } = UseUserStore();
+  const { handleLogin, getUserLoginInfo } = UseUserStore();
   const router = useRouter();
 
   const formik = useFormik({
@@ -36,6 +36,7 @@ export default function Home() {
         email: values.email,
         password: values.password
       })
+      await getUserLoginInfo()
       router.push("/search")
     },
   });

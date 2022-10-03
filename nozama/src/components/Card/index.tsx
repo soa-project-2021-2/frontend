@@ -11,7 +11,7 @@ import styles from './styles.module.scss'
 
 interface CardProps {
     title: string;
-    price: string;
+    price: number;
     imageUrl: string;
     imageAlt: string;
     handleAdd: () => void

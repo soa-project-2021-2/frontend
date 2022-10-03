@@ -9,40 +9,32 @@ import {
     UnorderedList,
     ListItem,
 } from "@chakra-ui/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Header from "../../src/components/Header"
 import TagStatus from "../../src/components/TagStatus"
 import uuid from 'react-uuid'
 import { GetServerSideProps } from "next"
 import { parseCookies } from "nookies"
+import { getUserOrder } from "../../src/services/order"
+import UseUserStore from "../../src/stories/userStore"
 
 export default function Orders() {
-    const [obj, setObj] = useState(
-        [
-            {
-                id: 1,
-                list_products: [
-                    {
-                        name: 'TV',
-                        price: 1200,
-                        qtd: 1
-                    },
-                    {
-                        name: 'Smartphone',
-                        price: 1800,
-                        qtd: 4
-                    },
-                    {
-                        name: 'Mouse',
-                        price: 200,
-                        qtd: 2
-                    },
-                ],
-                price_total: 3200,
-                status: "created"
-            }
-        ]
-    )
+    const [orders, setOrders] = useState([])
+   
+    const {UserLogin, getUserLoginInfo} = UseUserStore();   
+    async function fetchOrders() {
+        const data = await getUserOrder(UserLogin.uuid);
+        setOrders(data)
+    }
+    useEffect(() => {
+        getUserLoginInfo();
+        fetchOrders();
+    }, []);
+
+    useEffect(() => {
+        console.log(orders)
+    }, [orders]);
+
 
     return (
         <>
@@ -59,14 +51,14 @@ export default function Orders() {
                     </Thead>
                     <Tbody>
                         {
-                            obj.map(item => {
+                            orders.length > 0 && orders?.map(item => {
                                 return (
                                     <Tr key={item.id}>
                                         <Td>{item.id}</Td>
                                         <Td>
                                             <UnorderedList>
                                                 {
-                                                    item.list_products.map(product => {
+                                                    item.products?.map(product => {
                                                         return (
                                                             <ListItem key={uuid()}>{product.qtd} {product.name} (${product.price})</ListItem>
                                                         )
@@ -74,7 +66,7 @@ export default function Orders() {
                                                 }
                                             </UnorderedList>
                                         </Td>
-                                        <Td isNumeric>{item.price_total}</Td>
+                                        <Td isNumeric>{item.amount}</Td>
                                         <Td>
                                             <TagStatus status={item.status} />
                                         </Td>
